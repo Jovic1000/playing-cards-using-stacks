@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Stack.h"
-#include "Cards.h"
+#include "Queue.h"
+
 
 
 int main()
@@ -37,14 +38,64 @@ int main()
 		//
 	}
 
+	// stack 
+	{
+		Stack<Cards>* cardStack = new Stack<Cards>();
+
+		Cards* card1 = new Cards(SPADE, 13);
+		Cards* card2 = new Cards(SPADE, 12);
+		Cards* card3 = new Cards(HEART, 2);
+		Cards* card4 = new Cards(DIAMOND, 1);
+		card1->OutputCard();
+
+		std::cout << "Before pop" << std::endl;
+		cardStack->Push(card1);
+		cardStack->Push(card2);
+		cardStack->ShowContents();
+		std::cout << "After empty" << std::endl;
+		cardStack->Empty();
+		cardStack->ShowContents();
+
+		cardStack->Push(card3);
+		cardStack->Push(card4);
+		cardStack->ShowContents();
+		cardStack->Pop();
+		cardStack->ShowContents();
+
+		system("pause");
+		delete cardStack;
+	}
+
+	//queue
+	{
+		Queue<Cards>* cardQueue = new Queue<Cards>();
+
+		Cards* card1 = new Cards(SPADE, 13);
+		Cards* card2 = new Cards(SPADE, 12);
+		Cards* card3 = new Cards(HEART, 2);
+		Cards* card4 = new Cards(DIAMOND, 1);
+		card1->OutputCard();
+
+		std::cout << "Before pop" << std::endl;
+		cardQueue->Push(card1);
+		cardQueue->Push(card2);
+		cardQueue->ShowContents();
+
+		std::cout << "After empty" << std::endl;
+		cardQueue->Empty();
+		cardQueue->ShowContents();
+
+		cardQueue->Push(card3);
+		cardQueue->Push(card4);
+		cardQueue->ShowContents();
+		cardQueue->Pop();
+		cardQueue->ShowContents();
 
 
-	Cards* card1 = new Cards(SPADE, 13);
-	card1->OutputCard();
+		system("pause");
+		delete cardQueue;
 
-	Node<Cards>* newCard = new Node<Cards>(*card1);
+	}
 
-
-	delete card1;
 	return 0;
 }

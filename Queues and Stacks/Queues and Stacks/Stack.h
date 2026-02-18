@@ -1,5 +1,6 @@
 #pragma once
 #include "Node.h"
+#include "Cards.h"
 #include <iostream>
 
 template<typename T>
@@ -7,11 +8,13 @@ class Stack
 {
 public: 
 
-	Node<T>* GetHead();
+	Node* GetHead();
+	Node* Peek();
 	void ShowContents();
-	void SetHead(Node<T>* node);
-	void Push(Node<T>* node);
+	void SetHead(Node* node);
+	void Push(Cards* card);
 	void Pop();
+	void Empty();
 
 
 
@@ -20,32 +23,41 @@ public:
 private:
 
 
-	Node<T>* m_head;
+	Node* m_head;
 
 };
 
 template<typename T>
-inline Node<T>* Stack<T>::GetHead()
+inline Node* Stack<T>::GetHead()
 {
 	return m_head;
 }
 
 template<typename T>
+inline Node* Stack<T>::Peek()
+{
+	return m_head->GetValue();
+}
+
+template<typename T>
 inline void Stack<T>::ShowContents()
 {
-	Node<T>* tempNode = GetHead();
+	Node* tempNode = GetHead();
 
 	std::cout << "----------CONTENTS----------" << std::endl;
 
 	while (tempNode != nullptr)
 	{
+		
 		if (tempNode->GetNext() != nullptr)
 		{
-			std::cout << tempNode->GetValue() << ", ";
+			tempNode->GetValue().OutputCard();
+			std::cout << ", ";
 		}
 		else
 		{
-			std::cout << tempNode->GetValue() << std::endl;;
+			tempNode->GetValue().OutputCard();
+			std::cout << std::endl;
 		}
 
 		tempNode = tempNode->GetNext();
@@ -54,40 +66,73 @@ inline void Stack<T>::ShowContents()
 }
 
 template<typename T>
-inline void Stack<T>::SetHead(Node<T>* node)
+inline void Stack<T>::SetHead(Node* node)
 {
 	m_head = node;
 }
 
 template<typename T>
-inline void Stack<T>::Push(Node<T>* node)
+inline void Stack<T>::Push(Cards* card)
 {
+	Node* newNode = new Node(*card);
+
 	if (GetHead() == nullptr)
 	{
-		SetHead(node);
+		SetHead(newNode);
 		return;
 	}
 	else
 	{
-		Node<T>* tempNode = GetHead();
+		Node* tempNode = GetHead();
 
-		node->SetNext(tempNode);
+		newNode->SetNext(tempNode);
 
-		SetHead(node);
+		SetHead(newNode);
 
 	}
-
-
 }
 
 template<typename T>
 inline void Stack<T>::Pop()
 {
-	Node<T>* currentHead = GetHead();
-	SetHead(currentHead->GetNext());
-	currentHead->SetNext(nullptr);
-	delete currentHead;
+	if (GetHead() != nullptr)
+	{
+		Node* currentHead = GetHead();
+		SetHead(currentHead->GetNext());
+		currentHead->SetNext(nullptr);
+		delete currentHead;
+		
+	}
+	else
+	{
+		std::cout << "No stack to delete!" << std::endl;
+	}
 }
+
+template<typename T>
+inline void Stack<T>::Empty()
+{
+	Node* tempNode = GetHead();
+	bool loop = true;
+
+	while (loop)
+	{
+		if (tempNode != nullptr)
+		{
+			loop = true;
+		}
+		else
+		{
+			loop = false;
+			return;
+		}
+
+		tempNode = tempNode->GetNext();
+
+		Pop();
+	}
+}
+
 
 template<typename T>
 inline Stack<T>::Stack() : m_head(nullptr)

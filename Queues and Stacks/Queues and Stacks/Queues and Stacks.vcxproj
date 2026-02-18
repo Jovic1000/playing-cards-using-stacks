@@ -127,11 +127,17 @@
   <ItemGroup>
     <ClCompile Include="Cards.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cards.h" />
     <ClInclude Include="Node.h" />
+    <ClInclude Include="Queue.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Stack.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Queues and Stacks.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
