@@ -127,7 +127,6 @@
   <ItemGroup>
     <ClCompile Include="Cards.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Node.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cards.h" />

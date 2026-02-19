@@ -1,22 +1,19 @@
-#pragma once
-#include "Node.h"
-#include "Cards.h"
-#include <iostream>
+#include "Stack.h"
 
 template<typename T>
 class Queue
 {
 public:
 
-	Node* GetHead();
-	Node* GetTail();
-	Cards Peek();
+	Node<T>* GetHead();
+	Node<T>* GetTail();
+	T Peek();
 	void ShowContents();
-	void SetHead(Node* node);
-	void Push(Cards* card);
+	void SetHead(Node<T>* node);
+	void Push(T* card);
 	void Pop();
 	void Empty();
-	void SetTail(Node* tail);
+	void SetTail(Node<T>* tail);
 
 
 
@@ -24,25 +21,25 @@ public:
 
 private:
 
-	Node* m_tail;
-	Node* m_head;
+	Node<T>* m_tail;
+	Node<T>* m_head;
 
 };
 
 template<typename T>
-inline Node* Queue<T>::GetHead()
+inline Node<T>* Queue<T>::GetHead()
 {
 	return m_head;
 }
 
 template<typename T>
-inline Node* Queue<T>::GetTail()
+inline Node<T>* Queue<T>::GetTail()
 {
 	return m_tail;
 }
 
 template<typename T>
-inline Cards Queue<T>::Peek()
+inline T Queue<T>::Peek()
 {
 	return GetHead()->GetValue();
 }
@@ -50,7 +47,7 @@ inline Cards Queue<T>::Peek()
 template<typename T>
 inline void Queue<T>::ShowContents()
 {
-	Node* tempNode = GetHead();
+	Node<T>* tempNode = GetHead();
 
 	std::cout << "----------CONTENTS----------" << std::endl;
 
@@ -59,12 +56,12 @@ inline void Queue<T>::ShowContents()
 
 		if (tempNode->GetNext() != nullptr)
 		{
-			tempNode->GetValue().OutputCard();
+			std::cout << tempNode->GetValue();
 			std::cout << ", ";
 		}
 		else
 		{
-			tempNode->GetValue().OutputCard();
+			std::cout << tempNode->GetValue();
 			std::cout << std::endl;
 		}
 
@@ -74,15 +71,15 @@ inline void Queue<T>::ShowContents()
 }
 
 template<typename T>
-inline void Queue<T>::SetHead(Node* node)
+inline void Queue<T>::SetHead(Node<T>* node)
 {
 	m_head = node;
 }
 
 template<typename T>
-inline void Queue<T>::Push(Cards* card)
+inline void Queue<T>::Push(T* card)
 {
-	Node* newNode = new Node(*card);
+	Node<T>* newNode = new Node<T>(*card);
 
 	if (GetTail() == nullptr)
 	{
@@ -92,7 +89,7 @@ inline void Queue<T>::Push(Cards* card)
 	}
 	else
 	{
-		Node* tempNode = GetTail();
+		Node<T>* tempNode = GetTail();
 
 		tempNode->SetNext(newNode);
 
@@ -106,7 +103,7 @@ inline void Queue<T>::Pop()
 {
 	if (GetHead() != nullptr)
 	{
-		Node* currentHead = GetHead();
+		Node<T>* currentHead = GetHead();
 		SetHead(currentHead->GetNext());
 		currentHead->SetNext(nullptr);
 		delete currentHead;
@@ -125,7 +122,7 @@ inline void Queue<T>::Pop()
 template<typename T>
 inline void Queue<T>::Empty()
 {
-	Node* tempNode = GetHead();
+	Node<T>* tempNode = GetHead();
 	bool loop = true;
 
 	while (loop)
@@ -147,12 +144,12 @@ inline void Queue<T>::Empty()
 }
 
 template<typename T>
-inline void Queue<T>::SetTail(Node* tail)
+inline void Queue<T>::SetTail(Node<T>* tail)
 {
 	m_tail = tail;
 }
 
 template<typename T>
-inline Queue<T>::Queue() : m_head(nullptr), m_tail(nullptr)
+inline Queue<T>::Queue() : m_head(), m_tail()
 {
-}
+};

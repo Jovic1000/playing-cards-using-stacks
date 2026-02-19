@@ -1,4 +1,5 @@
 #pragma once
+#include<iostream>
 
 enum SUITS
 {
@@ -22,7 +23,8 @@ public:
 
 private:
 
+	friend std::ostream& operator<<(std::ostream& os, const Cards& cards);
+
 	SUITS m_currentSuit;
 	int m_number;
 };
-

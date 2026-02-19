@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Stack.h"
 #include "Queue.h"
 
@@ -38,28 +37,32 @@ int main()
 		//
 	}
 
+
 	// stack 
 	{
+		std::cout << "----------STACK----------" << std::endl;
+
 		Stack<Cards>* cardStack = new Stack<Cards>();
 
-		Cards* card1 = new Cards(SPADE, 13);
-		Cards* card2 = new Cards(SPADE, 12);
-		Cards* card3 = new Cards(HEART, 2);
+		Cards* card1 = new Cards(SPADE, 1);
+		Cards* card2 = new Cards(CLUB, 2);
+		Cards* card3 = new Cards(HEART, 12);
 		Cards* card4 = new Cards(DIAMOND, 1);
-		card1->OutputCard();
 
-		std::cout << "Before pop" << std::endl;
+		std::cout << "Before pop:" << std::endl;
 		cardStack->Push(card1);
 		cardStack->Push(card2);
 		cardStack->ShowContents();
-		std::cout << "After empty" << std::endl;
+		std::cout << "After empty:" << std::endl;
 		cardStack->Empty();
 		cardStack->ShowContents();
 
 		cardStack->Push(card3);
 		cardStack->Push(card4);
+		std::cout << "After push:" << std::endl;
 		cardStack->ShowContents();
 		cardStack->Pop();
+		std::cout << "After pop:" << std::endl;
 		cardStack->ShowContents();
 
 		system("pause");
@@ -68,13 +71,15 @@ int main()
 
 	//queue
 	{
+		std::cout << std::endl << std::endl;
+		std::cout << "----------QUEUE----------" << std::endl;
+
 		Queue<Cards>* cardQueue = new Queue<Cards>();
 
-		Cards* card1 = new Cards(SPADE, 13);
-		Cards* card2 = new Cards(SPADE, 12);
-		Cards* card3 = new Cards(HEART, 2);
+		Cards* card1 = new Cards(SPADE, 1);
+		Cards* card2 = new Cards(CLUB, 2);
+		Cards* card3 = new Cards(HEART, 12);
 		Cards* card4 = new Cards(DIAMOND, 1);
-		card1->OutputCard();
 
 		std::cout << "Before pop" << std::endl;
 		cardQueue->Push(card1);
